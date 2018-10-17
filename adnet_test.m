@@ -375,15 +375,20 @@ for frameIdx = 1 : vid_info.nframes
         hold off;
         drawnow;
         
-        curr_img = insertObjectAnnotation(curr_img,'Rectangle', curr_bbox, num2str(frameIdx), 'LineWidth',3);
-        writeVideo(writerObj,curr_img);    % save current frame to video file in 'tmp/test.avi'
+        if opts.saveVideo
+            curr_img = insertObjectAnnotation(curr_img,'Rectangle', curr_bbox, num2str(frameIdx), 'LineWidth',3);
+            writeVideo(writerObj,curr_img);    % save current frame to video file in 'tmp/test.avi'
+        end
     end
     
     % bbox results
     bboxes(frameIdx,:) = curr_bbox;
 end
 
-close(writerObj);
+if opts.saveVideo
+    close(writerObj);
+end
+
 close(clf);         % close current figure
 
 % PRECISION RESULTS
