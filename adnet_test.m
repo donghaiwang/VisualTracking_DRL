@@ -362,7 +362,7 @@ for frameIdx = 1 : vid_info.nframes
         clf(res_fig);
         imshow(curr_img);
         rectangle('Position', curr_bbox,'EdgeColor', [0,0,1],'LineWidth',3.0);
-        set(gca,'position',[0 0 1 1]);
+%         set(gca,'position',[0 0 1 1]);
         text(20,10,num2str(frameIdx),'Color','y', 'HorizontalAlignment', 'left', 'FontWeight','bold', 'FontSize', 30);
         hold off;
         drawnow;
