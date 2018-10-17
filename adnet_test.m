@@ -3,6 +3,14 @@ function [bboxes, t_sum, precisions] = adnet_test(net, vid_path, opts)
 %
 % Sangdoo Yun, 2017.
 
+if opts.saveVideo
+    pathSplited = split(vid_path, filesep);
+    videoName = pathSplited(end);
+    saveVideofullfile = strcat('tmp/', videoName, '.avi');
+    writerObj = VideoWriter(saveVideofullfile{1});    % saving to same video name means that only save current video.
+    open(writerObj);
+end
+
 fprintf('Testing sequences in %s... \n', vid_path);
 t_sum = 0;
 
@@ -366,11 +374,17 @@ for frameIdx = 1 : vid_info.nframes
         text(20,10,num2str(frameIdx),'Color','y', 'HorizontalAlignment', 'left', 'FontWeight','bold', 'FontSize', 30);
         hold off;
         drawnow;
+        
+        curr_img = insertObjectAnnotation(curr_img,'Rectangle', curr_bbox, num2str(frameIdx), 'LineWidth',3);
+        writeVideo(writerObj,curr_img);    % save current frame to video file in 'tmp/test.avi'
     end
     
     % bbox results
     bboxes(frameIdx,:) = curr_bbox;
 end
+
+close(writerObj);
+close(clf);         % close current figure
 
 % PRECISION RESULTS
 positions = bboxes(:, [2,1]) + bboxes(:, [4,3]) / 2;
