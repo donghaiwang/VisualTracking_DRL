@@ -1,0 +1,100 @@
+clear;
+
+net = alexnet;
+
+net.Layers;
+
+
+%%
+layer = 2;
+name = net.Layers(layer).Name;
+
+size(net.Layers(6, 1).Weights)      % 5x5x48x256
+
+
+%% conv1
+channels = 1:56;
+
+I = deepDreamImage(net,layer,channels, ...
+    'PyramidLevels',1);
+
+conv1Fig = figure;
+montage(I);
+title(['Layer ',name,' Features'])
+
+saveas(conv1Fig, fullfile(fileName, 'conv1.jpg'));
+
+
+%% conv2
+layer = 6;
+channels = 1:30;
+
+I = deepDreamImage(net,layer,channels,...
+    'PyramidLevels',1);
+
+conv2Fig = figure;
+montage(I)
+name = net.Layers(layer).Name;
+title(['Layer ',name,' Features'])
+
+saveas(conv2Fig, fullfile(fileName, 'conv2.jpg'));
+
+
+%% conv3-5
+layers = [10 12 14];
+channels = 1:30;
+
+for layer = layers
+    I = deepDreamImage(net,layer,channels,...
+        'Verbose',false, ...
+        'PyramidLevels',1);
+
+    conv3_5 = figure;
+    montage(I)
+    name = net.Layers(layer).Name;
+    title(['Layer ',name,' Features']);
+    
+    saveas(conv2Fig, fullfile(fileName, ['conv' 2 '.jpg']));
+end
+
+
+%% visualize fc
+layers = [17 20];
+
+channels = 1:6;
+
+for layer = layers
+    I = deepDreamImage(net,layer,channels, ...
+        'Verbose',false, ...
+        'NumIterations',50);
+
+    figure
+    montage(I)
+    name = net.Layers(layer).Name;
+    title(['Layer ',name,' Features'])
+end
+
+
+%% finnaly fc
+layer = 23;
+channels = [9 188 231 563 855 975];
+
+net.Layers(end).ClassNames(channels);
+
+I = deepDreamImage(net,layer,channels, ...
+    'Verbose',false, ...
+    'NumIterations',50);
+
+figure
+montage(I)
+name = net.Layers(layer).Name;
+title(['Layer ',name,' Features']);
+
+
+%% save image
+fileName = mfilename;
+if ~exist(fileName, 'dir')
+    mkdir(fileName);
+end
+
+

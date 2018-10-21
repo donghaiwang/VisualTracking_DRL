@@ -2,7 +2,7 @@ function [t,p, results] = adnet_demo (vid_path)
 % ADNET_DEMO Demonstrate `action-decision network'
 
 if nargin < 1
-    vid_path = 'data/CarDark';
+    vid_path = 'data/Freeman1';
 end
 
 addpath('test/');
