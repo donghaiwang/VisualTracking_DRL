@@ -1,7 +1,7 @@
 function [bboxes, t_sum, precisions] = adnet_test(net, vid_path, opts)
 % ADNET_DEMO Run tracking on a sequence
 %
-% Sangdoo Yun, 2017.
+% Haidong Wang, 2018.
 
 if opts.saveVideo
     pathSplited = split(vid_path, filesep);
