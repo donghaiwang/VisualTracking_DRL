@@ -8,6 +8,7 @@
 - Test on (ubuntu 14.04 and ubuntu 16.04) 64bit, MATLAB 2017a and MATLAB 2018a, use Cuda-8.0 and NVIDIA GTX 1080 TI.
 - Run `adnet_compile.m` to compile MatConvNet.
 - modify train data path: utils/get_benchmark_path.m
+- 'models/imagenet-vgg-m-conv1-3.mat' copy from [[MDNet]](https://github.com/HyeonseobNam/MDNet/blob/master/models/imagenet-vgg-m-conv1-3.mat)
 
 ### Run tracking
 - run `adnet_demo.m`.
