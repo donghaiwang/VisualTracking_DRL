@@ -18,9 +18,9 @@ switch bench_name
         if(~exist(imgDir,'dir'))
             error('%s does not exist!!',imgDir);
         end
-        img_files = dir(fullfile(imgDir,'*.jpg'));
+        img_files = dir(fullfile(imgDir, 'color', '*.jpg'));        % image exist in {bag}/color/*.jpg 
         for i = 1 : numel(img_files)
-            video_info.img_files(i).name = fullfile(video_path, video_name, img_files(i).name);
+            video_info.img_files(i).name = fullfile(video_path, video_name, 'color', img_files(i).name);  % raw data directory contains 'color' directory
         end
         
         % gt path
