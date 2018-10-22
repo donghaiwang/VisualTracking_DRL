@@ -7,6 +7,9 @@ if opts.saveVideo
     pathSplited = split(vid_path, filesep);
     videoName = pathSplited(end);
     saveVideofullfile = strcat('tmp/', videoName, '.avi');
+    if ~exist('tmp', 'dir')
+        mkdir('tmp');
+    end
     writerObj = VideoWriter(saveVideofullfile{1});    % saving to same video name means that only save current video.
     open(writerObj);
 end
