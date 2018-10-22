@@ -3,9 +3,9 @@ function adnet_compile
 % 
 % HaiDong Wang, 2018.
 if ispc
-    cudaRoot = 'C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0';   % windows下编译暂时有问题
+    cudaRoot = 'C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0';
 else
-    cudaRoot = '/usr/local/cuda-8.0';  % ubuntu中cuda的安装目录（指定使用cuda 8.0，其他版本的cuda可能有问题）
+    cudaRoot = '/usr/local/cuda-8.0';
 end
 
 fprintf('compile matconvnet\n');
