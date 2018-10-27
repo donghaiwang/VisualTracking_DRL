@@ -17,6 +17,7 @@ load('models/net_rl.mat');
 opts.visualize = true;
 opts.printscreen = true;
 opts.saveVideo = true;      % save video or not
+opts.viewGroundTruth = true;
 
 rng(1004);
 [results, t, p] = adnet_test(net, vid_path, opts);

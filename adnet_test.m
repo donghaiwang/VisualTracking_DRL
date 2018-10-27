@@ -5,7 +5,7 @@ function [bboxes, t_sum, precisions] = adnet_test(net, vid_path, opts)
 
 if opts.saveVideo
     pathSplited = split(vid_path, filesep);
-    videoName = pathSplited(end);
+    videoName = pathSplited(end);   
     saveVideofullfile = strcat('tmp/', videoName, '.avi');
     if ~exist('tmp', 'dir')
         mkdir('tmp');
@@ -370,18 +370,30 @@ for frameIdx = 1 : vid_info.nframes
     % Visualize
     % ---------------------
     if opts.visualize == true
-        clf(res_fig);
-        imshow(curr_img);
-        rectangle('Position', curr_bbox,'EdgeColor', [0,0,1],'LineWidth',3.0);
-%         set(gca,'position',[0 0 1 1]);
-        text(20,10,num2str(frameIdx),'Color','y', 'HorizontalAlignment', 'left', 'FontWeight','bold', 'FontSize', 30);
-        hold off;
-        drawnow;
         
         if opts.saveVideo
-            curr_img = insertObjectAnnotation(curr_img,'Rectangle', curr_bbox, num2str(frameIdx), 'LineWidth',3);
+            curr_img = insertText(curr_img, [0, 0], num2str(frameIdx), 'FontSize', 60);     % insert frame index in the left top
+            curr_img = insertText(curr_img, [imSize(2)*0.8, imSize(1)*0.05], '------ Ground Truth', 'FontSize', 30, 'TextColor', 'red');     % insert color comment in the right top
+            curr_img = insertText(curr_img, [imSize(2)*0.8, imSize(1)*0.1], '------ Predicted Box', 'FontSize', 30, 'TextColor', 'green');     % insert color comment in the right top
+            curr_img = insertObjectAnnotation(curr_img,'Rectangle', curr_bbox, '', 'LineWidth',3, 'Color', 'green');
+            if opts.viewGroundTruth == true
+                curBoundingBox = vid_info.gt(frameIdx,:);
+                curr_img = insertObjectAnnotation(curr_img,'Rectangle', curBoundingBox, '', 'LineWidth',3, 'Color', 'red');
+            end
             writeVideo(writerObj,curr_img);    % save current frame to video file in 'tmp/test.avi'
         end
+        
+        clf(res_fig);
+        imshow(curr_img);
+%         rectangle('Position', curr_bbox,'EdgeColor', [0,0,1],'LineWidth',3.0);
+%         if opts.viewGroundTruth == true
+%             curBoundingBox = vid_info.gt(frameIdx,:);
+%             rectangle('Position', curBoundingBox,'EdgeColor', [1,0,0],'LineWidth',3.0);
+%         end
+% %         set(gca,'position',[0 0 1 1]);
+%         text(20,10,num2str(frameIdx),'Color','y', 'HorizontalAlignment', 'left', 'FontWeight','bold', 'FontSize', 30);
+%         hold off;
+        drawnow;
     end
     
     % bbox results
