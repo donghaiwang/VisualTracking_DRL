@@ -1,5 +1,6 @@
 %% Configure Vehicle Detector and Multi-Object Tracker
-detector = vehicleDetectorACF('full-view');
+% detector = vehicleDetectorACF('full-view');
+detector = vehicleDetectorFasterRCNN('full-view');
 [tracker, positionSelector] = setupTracker();
 
 
@@ -176,7 +177,8 @@ function tracks = removeNoisyTracks(tracks, positionSelector, imageSize)
     % Extract the positions from all the tracks.
     positions = getTrackPositions(tracks, positionSelector);
     % The track is 'invalid' if the predicted position is about to move out
-    % of the image, or if the bounding box is too small.
+    % of the image, or if the bounding box is too small. Typically, this
+    % implies the vehicles is far away.
     invalid = ( positions(:, 1) < 1 | ...
                 positions(:, 1) + positions(:, 3) > imageSize(2) | ...
                 positions(:, 3) <= 20 | ...
