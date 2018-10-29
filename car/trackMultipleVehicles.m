@@ -6,6 +6,7 @@ detector = vehicleDetectorFasterRCNN('full-view');
 
 %% Track Vehicles in a Video
 % Setup Video Reader and Player
+% videoFile   = fullfile(matlabroot,'toolbox/driving/drivingdata/05_highway_lanechange_25s.mp4');
 videoFile   = '05_highway_lanechange_25s.mp4';
 videoReader = VideoReader(videoFile);
 videoPlayer = vision.DeployableVideoPlayer();
