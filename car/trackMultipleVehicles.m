@@ -1,6 +1,6 @@
 %% Configure Vehicle Detector and Multi-Object Tracker
 % detector = vehicleDetectorACF('full-view');
-detector = vehicleDetectorFasterRCNN('full-view');
+detector = vehicleDetectorFasterRCNN('full-view');  % more slow, high precision
 [tracker, positionSelector] = setupTracker();
 
 
