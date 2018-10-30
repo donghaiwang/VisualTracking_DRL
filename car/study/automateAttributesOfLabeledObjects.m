@@ -32,7 +32,7 @@ Iout = insertObjectAnnotation(I, 'rectangle', bboxes, distanceStr);
 imshow(Iout);
 title('Distance of Vehicles from Camera');
 
-%% use the vehicle detection and distance estimation automation class in the app
+%% use the vehicle detection and distance estimation automation class in the app (test in matlab2018a failed, matlab2018b success!)
 mkdir('+vision/+labeler');
 % copyfile(fullfile(matlabroot, 'examples', 'driving', 'main', 'VehicleDetectionAndDistanceEstimation.m'), '+vision/+labeler');  % only contains in matlab2018b
 load('FCWDemoMonoCameraSensor.mat', 'sensor');
