@@ -1,6 +1,6 @@
 %% Configure Vehicle Detector and Multi-Object Tracker
 % detector = vehicleDetectorACF('full-view');
-detector = vehicleDetectorFasterRCNN('full-view');  % more slow, high precision
+detector = vehicleDetectorFasterRCNN('full-view');  % more slow, high precision, model path: /home/dong/matlab/toolbox/driving/drivingutilities/classifierdata/fasterRCNN/full-view.mat (front-rear-view.mat)
 [tracker, positionSelector] = setupTracker();
 
 
