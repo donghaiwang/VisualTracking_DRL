@@ -21,6 +21,10 @@ middleLayers = [
     reluLayer()
     convolution2dLayer(filterSize, numFilters, 'Padding', 1)
     reluLayer();
+    convolution2dLayer(filterSize, numFilters, 'Padding', 1)
+    reluLayer()
+    convolution2dLayer(filterSize, numFilters, 'Padding', 1)
+    reluLayer();
     maxPooling2dLayer(3, 'Stride', 2)
     ];
 
@@ -75,7 +79,7 @@ options = [
 
 %% train Faster R-CNN
 % 'NumRegionsToSample', [256 128 256 128], ...
-doTrainingAndEval = true;
+doTrainingAndEval = true;  % false: AP=65%; true: AP=68%
 if doTrainingAndEval
     rng(0);
     detector = trainFasterRCNNObjectDetector(trainingData, layers, options, ...
