@@ -8,9 +8,9 @@ thresholdSetError = 0:50;
 
 switch evalType
     case 'SRE'
-        rpAll=['.\results\results_SRE_CVPR13\'];
+        rpAll=['.' filesep 'results' filesep, 'results_SRE_CVPR13' filesep];
     case {'TRE', 'OPE'}
-        rpAll=['.\results\results_TRE_CVPR13\'];
+        rpAll=['.' filesep 'results' filesep 'results_TRE_CVPR13' filesep];
 end
 
 for idxSeq=1:length(seqs)
