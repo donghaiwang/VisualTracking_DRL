@@ -4,7 +4,12 @@ clc
 
 addpath('./util');
 
-attPath = '.\anno\att\'; % The folder that contains the annotation files for sequence attributes
+% attPath = '.\anno\att\'; % The folder that contains the annotation files for sequence attributes
+if ispc
+    attPath = '.\anno\att\'; % The folder that contains the annotation files for sequence attributes
+else
+    attPath = './anno/att/';
+end
 
 attName={'illumination variation'	'out-of-plane rotation'	'scale variation'	'occlusion'	'deformation'	'motion blur'	'fast motion'	'in-plane rotation'	'out of view'	'background clutter' 'low resolution'};
 
@@ -91,9 +96,16 @@ end
 
 attNum = size(att,2);
 
-figPath = '.\figs\overall\';
+% figPath = '.\figs\overall\';
 
-perfMatPath = '.\perfMat\overall\';
+% perfMatPath = '.\perfMat\overall\';
+if ispc
+    figPath = '.\figs\overall\';
+    perfMatPath = '.\perfMat\overall\';
+else
+    figPath = './figs/overall/';
+    perfMatPath = './perfMat/overall/';
+end
 
 if ~exist(figPath,'dir')
     mkdir(figPath);

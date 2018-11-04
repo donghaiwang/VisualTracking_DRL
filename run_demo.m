@@ -5,7 +5,7 @@ videoCount = 0;
 videoIndexSet = {};
 videoNameSet = [];
 
-for i = 1 : length(videos)      % record all the video index and video name relation
+for i = 1 : length(videos)      % record all the video index and video name
     videoItem = videos(i);
     if ~strcmp(videoItem.name, '.') && ~strcmp(videoItem.name, '..') && videoItem.isdir == 1
         videoCount = videoCount+1;
