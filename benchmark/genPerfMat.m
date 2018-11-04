@@ -35,7 +35,12 @@ for idxSeq=1:length(seqs)
         t = trackers{idxTrk};
         %         load([rpAll s.name '_' t.name '.mat'], 'results','coverage','errCenter');
         
-        load([rpAll s.name '_' t.name '.mat'])
+        resultFile = [rpAll s.name '_' t.name '.mat'];
+        if ~exist(resultFile, 'file')
+            resultFile = [rpAll s.name '_' lower(t.name) '.mat'];
+        end
+        load(resultFile);
+%         load([rpAll s.name '_' t.name '.mat'])
         disp([s.name ' ' t.name]);
         
         aveCoverageAll=[];
