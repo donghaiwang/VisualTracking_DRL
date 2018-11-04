@@ -154,6 +154,10 @@ for i=1:length(metricTypeSet)
         
         % If the performance Mat file, dataName, does not exist, it will call
         % genPerfMat to generate the file.
+        matFilePath = fullfile('perfMat', 'overall');
+        if ~exist(matFilePath, 'dir')
+            mkdir(matFilePath);
+        end
         if ~exist(dataName)
             genPerfMat(seqs, trackers, evalType, nameTrkAll, perfMatPath);
         end        

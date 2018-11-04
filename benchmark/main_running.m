@@ -17,7 +17,7 @@ trackers=configTrackers;
 
 shiftTypeSet = {'left','right','up','down','topLeft','topRight','bottomLeft','bottomRight','scale_8','scale_9','scale_11','scale_12'};
 
-evalType='TRE'; %'OPE','SRE','TRE'
+evalType='SRE'; %'OPE','SRE','TRE'
 
 if ~exist('tmp', 'dir')
     mkdir('tmp');
@@ -181,7 +181,7 @@ for idxSeq=1:length(seqs)
     end
 end
 
-figure
+disp('running success!');
 t=clock;
 t=uint8(t(2:end));
 disp([num2str(t(1)) '/' num2str(t(2)) ' ' num2str(t(3)) ':' num2str(t(4)) ':' num2str(t(5))]);
