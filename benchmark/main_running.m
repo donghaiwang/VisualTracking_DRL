@@ -1,4 +1,3 @@
-%% 在测试集上跑跟踪代码，跑出的结果存在results文件夹中。
 close all
 clear
 clc
@@ -7,7 +6,7 @@ warning off all;
 addpath('util');
 
 addpath(('D:\software\matlab_third\vlfeat-0.9.21\toolbox\'));
-vl_setup
+% vl_setup
  
 addpath(('./rstEval'));
 addpath(['./trackers/VIVID_Tracker'])
@@ -20,6 +19,9 @@ shiftTypeSet = {'left','right','up','down','topLeft','topRight','bottomLeft','bo
 
 evalType='TRE'; %'OPE','SRE','TRE'
 
+if ~exist('tmp', 'dir')
+    mkdir('tmp');
+end
 diary(['./tmp/' evalType '.txt']);      % log command
 
 numSeq=length(seqs);
