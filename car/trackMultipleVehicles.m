@@ -7,9 +7,13 @@ detector = vehicleDetectorFasterRCNN('full-view');  % more slow, high precision,
 %% Track Vehicles in a Video
 % Setup Video Reader and Player
 % videoFile   = fullfile(matlabroot,'toolbox/driving/drivingdata/05_highway_lanechange_25s.mp4');
-videoFile   = '05_highway_lanechange_25s.mp4';
+% videoFile   = '05_highway_lanechange_25s.mp4';
+videoFile   = 'D:\workspace\data\test\20180505102607869.wmv';
 videoReader = VideoReader(videoFile);
-videoPlayer = vision.DeployableVideoPlayer();
+videoPlayer = vision.DeployableVideoPlayer(); 
+
+videoWriter = VideoWriter('D:\workspace\data\test\tracking.avi');
+open(videoWriter);
 
 currentStep = 0;
 snapshot = [];
@@ -41,19 +45,13 @@ while cont
     % Display the annotated frame.    
     videoPlayer(frameWithAnnotations);  
     
-    % Take snapshot for publishing at snapTimeStamp seconds
-%     if currentStep == snapTimeStamp
-%         snapshot = frameWithAnnotations;
-%     end   
+    writeVideo(videoWriter, frameWithAnnotations);
     
     % Exit the loop if the video player figure is closed by user.
     cont = hasFrame(videoReader) && isOpen(videoPlayer);
 end
+close(videoWriter);
 
-% if ~isempty(snapshot)
-%     figure
-%     imshow(snapshot)
-% end
 
 
 %%
