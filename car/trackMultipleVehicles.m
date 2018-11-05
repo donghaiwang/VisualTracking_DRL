@@ -7,12 +7,12 @@ detector = vehicleDetectorFasterRCNN('full-view');  % more slow, high precision,
 %% Track Vehicles in a Video
 % Setup Video Reader and Player
 % videoFile   = fullfile(matlabroot,'toolbox/driving/drivingdata/05_highway_lanechange_25s.mp4');
-% videoFile   = '05_highway_lanechange_25s.mp4';
-videoFile   = 'D:\workspace\data\test\20180505102607869.wmv';
+videoFile   = '05_highway_lanechange_25s.mp4';
+% videoFile   = 'D:\workspace\data\test\20180505102607869.wmv';
 videoReader = VideoReader(videoFile);
 videoPlayer = vision.DeployableVideoPlayer(); 
 
-videoWriter = VideoWriter('D:\workspace\data\test\tracking.avi');
+videoWriter = VideoWriter('tmp/tracking.avi');
 open(videoWriter);
 
 currentStep = 0;
@@ -206,6 +206,13 @@ function I = insertTrackBoxes(I, tracks, positionSelector)
 %         labels{i} = sprintf('x=%.1f,y=%.1f',0, 0);
     end
     
-    I = insertObjectAnnotation(I, 'rectangle', bboxes, labels, 'Color', 'yellow', ...
+    % display bounding box color according tracks.TrackID
+    % cell array
+    colorZoo = ["blue", "green", "cyan", "red", "magenta", "black", "white"];
+    displayColor = {};
+    for i = 1 : length(tracks)
+        displayColor{i} = colorZoo(mod(tracks(i).TrackID, length(colorZoo))+1);
+    end
+    I = insertObjectAnnotation(I, 'rectangle', bboxes, labels, 'Color', displayColor, ...
         'FontSize', 10, 'TextBoxOpacity', .8, 'LineWidth', 2);
 end
