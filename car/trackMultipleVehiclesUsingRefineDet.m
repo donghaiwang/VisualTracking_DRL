@@ -1,6 +1,44 @@
+clear classes;clc;
 %% Configure Vehicle Detector and Multi-Object Tracker
 % detector = vehicleDetectorACF('full-view');
 % detector = vehicleDetectorRefineDet();
+
+%% import python environment(python3.5, tensorflow 1.10, CUDA 9.0)
+% pyversion /usr/bin/python
+% pyversion
+
+refineDetProjectDir = [pwd filesep 'TF_RefineDet_CIDI3'];
+if count(py.sys.path, refineDetProjectDir) == 0
+    insert(py.sys.path, int32(0), refineDetProjectDir);
+end
+
+% https://ww2.mathworks.cn/matlabcentral/answers/265247-importing-custom-python-module-fails?s_tid=srchtitle
+% conda uninstall hdf5
+% conda uninstall h5py
+% pip uninstall hdf5
+% pip uninstall h5py
+refineDet = py.importlib.import_module('RefineDet');
+refineDetModel = refineDet.init();
+
+image_name_1 = '/home/dong/rl/VisualTracking_DRL/car/tmp/2.jpg';
+% test_image_1 = imread(image_name_1);
+% Conversion of MATLAB 'uint8' to Python is only supported for 1-N vectors.
+detectRes1 = refineDetModel.detection(py.str(image_name_1));
+% detectRes1{end}
+for i = 1 : length(detectRes1)
+    disp(detectRes1{i});
+end
+disp(length(detectRes1));
+
+
+
+
+% py.runRefineDet;
+% ret = py.runRefineDetDemo.predict();
+
+return
+
+%%
 detector = vehicleDetectorFasterRCNN('full-view');  % more slow, high precision, model path: /home/dong/matlab/toolbox/driving/drivingutilities/classifierdata/fasterRCNN/full-view.mat (front-rear-view.mat)
 [tracker, positionSelector] = setupTracker();
 
