@@ -4,6 +4,9 @@ videoFile   = '05_highway_lanechange_25s.mp4';
 videoReader = VideoReader(videoFile);
 cont = hasFrame(videoReader);
 currentStep = 0;
+if ~exist('tmp', 'dir')
+    mkdir('tmp');
+end
 imageListPath = [pwd filesep 'tmp' filesep 'imageList.txt'];
 imageListFileID = fopen(imageListPath, 'w');
 while cont
