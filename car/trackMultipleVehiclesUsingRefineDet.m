@@ -26,13 +26,14 @@ test_image_1 = imread(image_name_1);
 detectRes1 = refineDetModel.detection(py.str(image_name_1));
 
 % detectRes1{end}
+disp(detectRes1);
 for i = 1 : length(detectRes1)
     boxList = detectRes1{i};
     x1 = double(boxList{1});
     y1 = double(boxList{2});
     x2 = double(boxList{3});
     y2 = double(boxList{4});
-    test_image_1 = insertObjectAnnotation(test_image_1, 'rectangle', [x1 y1 x2 y2], '', 'Color', 'yellow', ...
+    test_image_1 = insertObjectAnnotation(test_image_1, 'rectangle', [x1 y1 x2-x1 y2-y1], '', 'Color', 'yellow', ...
         'FontSize', 10, 'TextBoxOpacity', .8, 'LineWidth', 2);
 end
 imshow(test_image_1);
