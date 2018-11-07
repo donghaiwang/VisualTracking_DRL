@@ -1,4 +1,4 @@
-clear classes;clc;
+clear;clc;
 %% Configure Vehicle Detector and Multi-Object Tracker
 % detector = vehicleDetectorACF('full-view');
 % detector = vehicleDetectorRefineDet();
