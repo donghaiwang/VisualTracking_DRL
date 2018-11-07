@@ -111,7 +111,7 @@ class Test_Moedel():
                 print('Please give a Model in args ...')
 
 
-    def detection(self, image_path):
+    def detect(self, image_path):
         # name = name.split('\n')[0]
         # img_name = name.split('/')[-1]
         img_src = scm.imread(image_path)

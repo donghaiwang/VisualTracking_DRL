@@ -31,7 +31,8 @@ def init():
                         'convert_model/save/model.ckpt', name='RefineDet')
     # model_path = os.getcwd() + os.sep + 'log' + os.sep + 'save_bbd'
     # must full path, otherwise detect many boxes
-    model_path = '/home/laoli/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_bbd'
+    # model_path = '/home/laoli/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_bbd'
+    model_path = '/home/laoli/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_cidi'
     model.build_model()
     model.load_model(model_path)
     return model
@@ -47,7 +48,7 @@ if __name__ == "__main__":
 
 
     model = init()
-    detect_res_1 = model.detection(image_name_1)
+    detect_res_1 = model.detect(image_name_1)
     print(detect_res_1)
     print(len(detect_res_1))
 
