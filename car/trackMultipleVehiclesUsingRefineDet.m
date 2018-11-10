@@ -1,62 +1,31 @@
 clear;clc;
+
+addpath('../conf');
+env = Env();
+
 %% Configure Vehicle Detector and Multi-Object Tracker
-% detector = vehicleDetectorACF('full-view');
-% detector = vehicleDetectorRefineDet();
 
-%% import python environment(python3.5, tensorflow 1.10, CUDA 9.0)
-% pyversion /usr/bin/python
-% pyversion
-
-
-% refineDetProjectDir = [pwd filesep 'TF_RefineDet_CIDI3'];
-% if count(py.sys.path, refineDetProjectDir) == 0
-%     insert(py.sys.path, int32(0), refineDetProjectDir);
-% end
-% 
-% % https://ww2.mathworks.cn/matlabcentral/answers/265247-importing-custom-python-module-fails?s_tid=srchtitle
-% % conda uninstall hdf5
-% % conda uninstall h5py
-% % pip uninstall hdf5
-% % pip uninstall h5py
-% refineDet = py.importlib.import_module('RefineDet');
-% refineDetModel = refineDet.init();
-% 
-% image_name_1 = '/home/laoli/rl/VisualTracking_DRL/car/tmp/1.jpg';
-% test_image_1 = imread(image_name_1);
-% % Conversion of MATLAB 'uint8' to Python is only supported for 1-N vectors.
-% detectRes1 = refineDetModel.detection(py.str(image_name_1));
-% 
-% % detectRes1{end}
-% disp(detectRes1);
-% for i = 1 : length(detectRes1)
-%     boxList = detectRes1{i};
-%     x1 = double(boxList{1});
-%     y1 = double(boxList{2});
-%     x2 = double(boxList{3});
-%     y2 = double(boxList{4});
-%     test_image_1 = insertObjectAnnotation(test_image_1, 'rectangle', [x1 y1 x2-x1 y2-y1], '', 'Color', 'yellow', ...
-%         'FontSize', 10, 'TextBoxOpacity', .8, 'LineWidth', 2);
-% end
-% imshow(test_image_1);
-% disp(length(detectRes1));
-
-
-%%
 detector = vehicleDetectorRefineDet();
-% detector = vehicleDetectorFasterRCNN('full-view');  % more slow, high precision, model path: /home/dong/matlab/toolbox/driving/drivingutilities/classifierdata/fasterRCNN/full-view.mat (front-rear-view.mat)
 [tracker, positionSelector] = setupTracker();
 
 
 %% Track Vehicles in a Video
 % Setup Video Reader and Player
 % videoFile   = fullfile(matlabroot,'toolbox/driving/drivingdata/05_highway_lanechange_25s.mp4');
-% videoFile   = '05_highway_lanechange_25s.mp4';      % build-in video
-videoFile   = 'tmp/20180505102607869.mp4';      % cidi hightway video
-% videoFile   = 'D:\workspace\data\test\20180505102607869.wmv';
+if env.isDebug
+    videoFile   = '05_highway_lanechange_25s.mp4';      % build-in video
+else
+    if ispc
+        videoFile   = 'D:\workspace\data\test\20180505102607869.wmv';   % work on windows
+    else
+        videoFile = '/data/cidi.wmv';   % linux on cidi work machine
+    end
+end
+
 videoReader = VideoReader(videoFile);
 videoPlayer = vision.DeployableVideoPlayer(); 
 
-videoWriter = VideoWriter('tmp/tracking.avi');
+videoWriter = VideoWriter(fullfile(tempdir, [datestr(now) '_tracking.avi']));
 open(videoWriter);
 
 currentStep = 0;
@@ -96,6 +65,9 @@ while cont
     cont = hasFrame(videoReader) && isOpen(videoPlayer);
 end
 close(videoWriter);
+release(videoPlayer);
+detector.close();
+clear classes;
 
 
 
@@ -284,35 +256,35 @@ function I = insertTrackBoxes(I, tracks, positionSelector)
     
     % display bounding box color according tracks.TrackID
     % cell array
-    colorZoo = ["blue", "green", "cyan", "red", "magenta", "black", "white"];
-%     colorZoo = [[220,220,220],...       % Gainsboro
-%                 [139, 0, 0], ...        % DarkRed
-%                 [255, 218, 185], ...     % PeachPuff
-%                 [139, 0, 139], ...      % DarkMagenta
-%                 [240, 255, 240], ...     % Honeydew
-%                 [0, 139, 139], ...      % DarkCyan
-%                 [25, 25, 112], ...      % MidnightBlue
-%                 [0, 0, 139], ...        % DarkBlue
-%                 [30, 144, 255], ...     % DodgerBlue
-%                 [139, 123, 139], ...    % Thistle4
-%                 [96, 123, 139], ...     % LightSkyBlue4
-%                 [145, 44, 238], ...     % Purple2
-%                 [0, 255, 255], ...      % Cyan
-%                 [46, 139, 87], ...      % SeaGreen4
-%                 [0, 255, 0], ...        % Green1
-%                 [255, 236, 139], ...    % LightGoldenrod1
-%                 [255, 255, 0], ...      % Yellow
-%                 [139, 105, 105], ...    % RosyBrown4
-%                 [255, 48, 48], ...      % Firebrick1
-%                 [255, 20, 147], ...     % DeepPink1
-%                 [144, 238, 144], ...    % LightGreen
+    colorZoo = ["yellow", "blue", "green", "cyan", "red", "magenta"];
+%     colorZoo = [[220,220,220]/255;...       % Gainsboro
+%                 [139, 0, 0]/255; ...        % DarkRed
+%                 [255, 218, 185]/255; ...     % PeachPuff
+%                 [139, 0, 139]/255; ...      % DarkMagenta
+% %                 [240, 255, 240], ...     % Honeydew
+% %                 [0, 139, 139], ...      % DarkCyan
+% %                 [25, 25, 112], ...      % MidnightBlue
+% %                 [0, 0, 139], ...        % DarkBlue
+% %                 [30, 144, 255], ...     % DodgerBlue
+% %                 [139, 123, 139], ...    % Thistle4
+% %                 [96, 123, 139], ...     % LightSkyBlue4
+% %                 [145, 44, 238], ...     % Purple2
+% %                 [0, 255, 255], ...      % Cyan
+% %                 [46, 139, 87], ...      % SeaGreen4
+% %                 [0, 255, 0], ...        % Green1
+% %                 [255, 236, 139], ...    % LightGoldenrod1
+% %                 [255, 255, 0], ...      % Yellow
+% %                 [139, 105, 105], ...    % RosyBrown4
+% %                 [255, 48, 48], ...      % Firebrick1
+% %                 [255, 20, 147], ...     % DeepPink1
+% %                 [144, 238, 144], ...    % LightGreen
 %                 ];       
     displayColor = {};
     for i = 1 : length(tracks)
         displayColor{i} = colorZoo(mod(tracks(i).TrackID, length(colorZoo))+1);
     end
         I = insertObjectAnnotation(I, 'rectangle', bboxes, labels, 'Color', displayColor, ...
-        'FontSize', 10, 'TextBoxOpacity', .8);
+        'FontSize', 10, 'TextBoxOpacity', .8, 'LineWidth', 2);
 %     I = insertObjectAnnotation(I, 'rectangle', bboxes, labels, 'Color', displayColor, ...
 %         'FontSize', 10, 'TextBoxOpacity', .8, 'LineWidth', 2);
 end

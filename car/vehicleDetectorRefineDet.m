@@ -11,6 +11,7 @@ end
 % pip uninstall hdf5
 % pip uninstall h5py
 refineDet = py.importlib.import_module('RefineDet');
+py.importlib.reload(refineDet);
 detector = refineDet.init();
 
 % image_name_1 = '/home/laoli/rl/VisualTracking_DRL/car/tmp/1.jpg';

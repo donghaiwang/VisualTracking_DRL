@@ -59,6 +59,7 @@ class Test_Moedel():
                                             dtype=np.float32)
 
     def build_model(self):
+        tf.reset_default_graph()
         if (self.testing):
             self.image = tf.placeholder(dtype=tf.float32, shape=(1, self.img_size[1],
                                     self.img_size[0],self.img_size[2]), name='input_img')
@@ -111,6 +112,10 @@ class Test_Moedel():
                 print('Please give a Model in args ...')
 
 
+    def close(self):
+        self.Session.close()
+
+
     def detect(self, image_path):
         # name = name.split('\n')[0]
         # img_name = name.split('/')[-1]
@@ -124,6 +129,7 @@ class Test_Moedel():
         img = np.expand_dims(img, axis=0)
         start = time.time()
         scores, locations = self.Session.run([self.pred['odm'][0], self.pred['odm'][1]], feed_dict={self.image: img})
+        # self.Session.close()
 
         rclasses, rscores, rbboxes = bboxes_select(scores,
                                                    locations,
