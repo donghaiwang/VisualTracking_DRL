@@ -261,32 +261,38 @@ function I = insertTrackBoxes(I, tracks, positionSelector)
     
     % display bounding box color according tracks.TrackID
     % cell array
-    colorZoo = ["yellow", "blue", "green", "cyan", "red", "magenta"];
-%     colorZoo = [[220,220,220]/255;...       % Gainsboro
-%                 [139, 0, 0]/255; ...        % DarkRed
-%                 [255, 218, 185]/255; ...     % PeachPuff
-%                 [139, 0, 139]/255; ...      % DarkMagenta
-% %                 [240, 255, 240], ...     % Honeydew
-% %                 [0, 139, 139], ...      % DarkCyan
-% %                 [25, 25, 112], ...      % MidnightBlue
-% %                 [0, 0, 139], ...        % DarkBlue
-% %                 [30, 144, 255], ...     % DodgerBlue
-% %                 [139, 123, 139], ...    % Thistle4
-% %                 [96, 123, 139], ...     % LightSkyBlue4
-% %                 [145, 44, 238], ...     % Purple2
-% %                 [0, 255, 255], ...      % Cyan
-% %                 [46, 139, 87], ...      % SeaGreen4
-% %                 [0, 255, 0], ...        % Green1
-% %                 [255, 236, 139], ...    % LightGoldenrod1
-% %                 [255, 255, 0], ...      % Yellow
-% %                 [139, 105, 105], ...    % RosyBrown4
-% %                 [255, 48, 48], ...      % Firebrick1
-% %                 [255, 20, 147], ...     % DeepPink1
-% %                 [144, 238, 144], ...    % LightGreen
-%                 ];       
-    displayColor = {};
+%     colorZoo = ["yellow", "blue", "green", "cyan", "red", "magenta"];
+    colorZoo = [[220,220,220];...       % Gainsboro
+                [139, 0, 0]; ...        % DarkRed
+                [255, 218, 185]; ...     % PeachPuff
+                [139, 0, 139];      % DarkMagenta
+                [240, 255, 240]; ...     % Honeydew
+                [0, 139, 139]; ...      % DarkCyan
+                [25, 25, 112]; ...      % MidnightBlue
+                [0, 0, 139]; ...        % DarkBlue
+                [30, 144, 255]; ...     % DodgerBlue
+                [139, 123, 139]; ...    % Thistle4
+                [96, 123, 139]; ...     % LightSkyBlue4
+                [145, 44, 238]; ...     % Purple2
+                [0, 255, 255]; ...      % Cyan
+                [46, 139, 87]; ...      % SeaGreen4
+                [0, 255, 0]; ...        % Green1
+                [255, 236, 139]; ...    % LightGoldenrod1
+                [255, 255, 0]; ...      % Yellow
+                [139, 105, 105]; ...    % RosyBrown4
+                [255, 48, 48]; ...      % Firebrick1
+                [255, 20, 147]; ...     % DeepPink1
+                [144, 238, 144]; ...
+            ];    % LightGreen
+                       
+    displayColor = zeros(length(tracks), 3);
     for i = 1 : length(tracks)
-        displayColor{i} = colorZoo(mod(tracks(i).TrackID, length(colorZoo))+1);
+        hashedID = mod(tracks(i).TrackID, length(colorZoo));
+        if hashedID == 0
+            displayColor(i,:) = colorZoo(int32(length(tracks)/2));
+        else
+            displayColor(i,:) = colorZoo(hashedID, :);
+        end
     end
         I = insertObjectAnnotation(I, 'rectangle', bboxes, labels, 'Color', displayColor, ...
         'FontSize', 10, 'TextBoxOpacity', .8, 'LineWidth', 2);
