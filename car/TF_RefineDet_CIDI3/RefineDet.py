@@ -2,9 +2,6 @@
 from test import *
 
 import scipy.misc as scm
-import os
-import matplotlib.pyplot as plt
-import cv2
 
 # -*- coding: UTF-8 -*-
 """
@@ -31,8 +28,8 @@ def init():
                         'convert_model/save/model.ckpt', name='RefineDet')
     # model_path = os.getcwd() + os.sep + 'log' + os.sep + 'save_bbd'
     # must full path, otherwise detect many boxes
-    model_path = '/home/dong/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_bbd'
-    # model_path = '/home/dong/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_cidi'
+    # model_path = '/home/laoli/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_bbd'
+    model_path = '/home/laoli/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_cidi'
     model.build_model()
     model.load_model(model_path)
     return model
@@ -42,54 +39,55 @@ def init():
 
 if __name__ == "__main__":
     # detect image
-    # image_name_1 = '/home/dong/tmp/car.jpg'
-    # test_image_1 = scm.imread(image_name_1)
-    #
-    # model = init()
-    # detect_res_1 = model.detect(image_name_1)
-    # print(detect_res_1)
-    # print(len(detect_res_1))
-    #
-    # for i in range(1, len(detect_res_1)):
-    #     x1 = int(detect_res_1[i][0])
-    #     y1 = int(detect_res_1[i][1])
-    #     x2 = int(detect_res_1[i][2])
-    #     y2 = int(detect_res_1[i][3])
+    image_name_1 = '/home/laoli/tmp/1.jpg'
+    test_image_1 = scm.imread(image_name_1)
+
+    model = init()
+    detect_res_1 = model.detect(image_name_1)
+    print(detect_res_1)
+    print(len(detect_res_1))
+
+    for i in range(1, len(detect_res_1)):
+        x1 = int(detect_res_1[i][0])
+        y1 = int(detect_res_1[i][1])
+        x2 = int(detect_res_1[i][2])
+        y2 = int(detect_res_1[i][3])
     #     cv2.rectangle(test_image_1, (x1, y1), (x2, y2), (0, 255, 0), 3)
     #
     # img_src = cv2.cvtColor(test_image_1, cv2.COLOR_BGR2RGB)
     # cv2.imshow('result', img_src)
     # cv2.waitKey()
 
+
     # detect video
-    cv2.namedWindow("Detect vehicle")
-    videoPath = '/data/cidi.wmv'
-    cap = cv2.VideoCapture(videoPath)
-    while cap.isOpened():
-        ret, frame = cap.read()
-
-        model = init()
-        cv2.imwrite('/tmp/buffer.jpg', frame);
-        detect_res_1 = model.detect('/tmp/buffer.jpg')
-        print(detect_res_1)
-        print(len(detect_res_1))
-
-        for i in range(1, len(detect_res_1)):
-            x1 = int(detect_res_1[i][0])
-            y1 = int(detect_res_1[i][1])
-            x2 = int(detect_res_1[i][2])
-            y2 = int(detect_res_1[i][3])
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 3)
-
-        img_src = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-        cv2.imshow('image', img_src)
-        cv2.waitKey(1)
-        # k = cv2.waitKey()
-        # if k & 0xff == ord('q'):
-        #     break
-    cap.release()
-    cv2.destroyAllWindows()
+    # cv2.namedWindow("Detect vehicle")
+    # videoPath = '/home/laoli/rl/VisualTracking_DRL/car/tmp/cidi.wmv'
+    # cap = cv2.VideoCapture(videoPath)
+    # while cap.isOpened():
+    #     ret, frame = cap.read()
+    #
+    #     model = init()
+    #     cv2.imwrite('/tmp/buffer.jpg', frame);
+    #     detect_res_1 = model.detect('/tmp/buffer.jpg')
+    #     print(detect_res_1)
+    #     print(len(detect_res_1))
+    #
+    #     for i in range(1, len(detect_res_1)):
+    #         x1 = int(detect_res_1[i][0])
+    #         y1 = int(detect_res_1[i][1])
+    #         x2 = int(detect_res_1[i][2])
+    #         y2 = int(detect_res_1[i][3])
+    #         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 3)
+    #
+    #     img_src = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    #
+    #     cv2.imshow('image', img_src)
+    #     cv2.waitKey(1)
+    #     # k = cv2.waitKey()
+    #     # if k & 0xff == ord('q'):
+    #     #     break
+    # cap.release()
+    # cv2.destroyAllWindows()
 
 
 

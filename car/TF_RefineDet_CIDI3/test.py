@@ -4,7 +4,7 @@ vgg(base network)->RefineDet_tf for vechile detection.
 @author: xie wei
 """
 import time
-import cv2
+# import cv2
 import tensorflow as tf
 import numpy as np
 import datetime

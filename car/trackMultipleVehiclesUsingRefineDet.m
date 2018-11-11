@@ -5,8 +5,9 @@ env = Env();
 
 %% Configure Vehicle Detector and Multi-Object Tracker
 
-detector = vehicleDetectorRefineDet();
 [tracker, positionSelector] = setupTracker();
+detector = vehicleDetectorRefineDet();
+
 
 
 %% Track Vehicles in a Video
