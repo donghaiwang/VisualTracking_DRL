@@ -18,7 +18,11 @@ else
     if ispc
         videoFile   = 'D:\workspace\data\test\20180505102607869.wmv';   % work on windows
     else
-        videoFile = '/data/cidi.wmv';   % linux on cidi work machine
+        if strcmp(env.workMachine, 'BASE')
+            videoFile = 'tmp/cidi.wmv';
+        else
+            videoFile = '/data/cidi.wmv';   % linux on cidi work machine
+        end
     end
 end
 
