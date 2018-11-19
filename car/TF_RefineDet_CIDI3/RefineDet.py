@@ -29,7 +29,7 @@ def init():
     # model_path = os.getcwd() + os.sep + 'log' + os.sep + 'save_bbd'
     # must full path, otherwise detect many boxes
     # model_path = '/home/laoli/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_bbd'
-    model_path = '/home/laoli/rl/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_cidi'
+    model_path = 'D:/workspace/rl/DRLT/VisualTracking_DRL/car/TF_RefineDet_CIDI3/log/save_cidi'
     model.build_model()
     model.load_model(model_path)
     return model
@@ -39,7 +39,7 @@ def init():
 
 if __name__ == "__main__":
     # detect image
-    image_name_1 = '/home/laoli/tmp/1.jpg'
+    image_name_1 = 'test/20180505102607869_000001.jpg'
     test_image_1 = scm.imread(image_name_1)
 
     model = init()

@@ -30,7 +30,7 @@ end
 videoReader = VideoReader(videoFile);
 videoPlayer = vision.DeployableVideoPlayer(); 
 
-videoWriter = VideoWriter(fullfile(tempdir, [datestr(now) '_tracking.avi']));
+videoWriter = VideoWriter(fullfile(tempdir, 'tracking.avi'));
 open(videoWriter);
 
 currentStep = 0;
