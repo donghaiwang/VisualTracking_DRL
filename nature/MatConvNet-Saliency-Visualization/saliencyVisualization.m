@@ -7,6 +7,21 @@ clear
 dbstop if error
 addpath('Functions')
 
+%% Download model file
+if ~exist('Models', 'dir')
+    mkdir('Models');
+else
+    disp('Models directory exist.');
+end
+
+modelName = fullfile('Models', 'imagenet-resnet-152-dag.mat');
+if ~exist(modelName, 'file')
+    modelURL = 'http://www.vlfeat.org/matconvnet/models/imagenet-resnet-152-dag.mat';
+    websave(modelName, modelURL);
+else
+    disp('Models exist.');
+end
+
 %% MatConvNet path
 run(fullfile('../../matconvnet/matlab/vl_setupnn.m'));
 
