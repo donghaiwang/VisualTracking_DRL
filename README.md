@@ -17,7 +17,7 @@
 - [[CFNet]](https://blog.csdn.net/discoverer100/article/details/79758131?utm_source=blogxgwz1)
 
 ### Prospect
-- [[Biology of Vision](http://www.nature.com/articles/s41586-018-0102-6)
+- [[Biology of Vision]](http://www.nature.com/articles/s41586-018-0102-6)
 - [[Active Object Tracking]](https://arxiv.org/abs/1808.03405)
 - [[Visual Navigation]](https://arxiv.org/abs/1609.05143)
 
