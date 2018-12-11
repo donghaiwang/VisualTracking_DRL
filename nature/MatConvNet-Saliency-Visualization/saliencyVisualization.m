@@ -8,16 +8,18 @@ dbstop if error
 addpath('Functions')
 
 %% Download model file
-if ~exist('Models', 'dir')
-    mkdir('Models');
+projectHome = fileparts(fileparts(fileparts(mfilename('fullpath'))));
+dataDir = fullfile(projectHome, 'data');
+if ~exist(dataDir, 'dir')
+    mkdir(dataDir);
 else
     disp('Models directory exist.');
 end
 
-modelName = fullfile('Models', 'imagenet-resnet-152-dag.mat');
-if ~exist(modelName, 'file')
+modelPath = fullfile(dataDir, 'imagenet-resnet-152-dag.mat');
+if ~exist(modelPath, 'file')
     modelURL = 'http://www.vlfeat.org/matconvnet/models/imagenet-resnet-152-dag.mat';
-    websave(modelName, modelURL);
+    websave(modelPath, modelURL);
 else
     disp('Models exist.');
 end
@@ -26,7 +28,6 @@ end
 run(fullfile('../../matconvnet/matlab/vl_setupnn.m'));
 
 %% Initialize Net
-modelPath = 'Models/imagenet-resnet-152-dag.mat';
 net = dagnn.DagNN.loadobj(load(modelPath));
 net.conserveMemory = false;
 net = dagnn.DagNN.loadobj(net);
