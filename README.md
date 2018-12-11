@@ -14,6 +14,12 @@
 - run `adnet_demo.m`.
 
 ### Other
+- [[ADNet]] 0.646   0.880
+- [[DRLT]](https://arxiv.org/abs/1701.08936)    0.635
+- [[DRL-IS]](https://link.springer.com/content/pdf/10.1007/978-3-030-01240-3_42.pdf)    0.671   0.909
+- [[MDNet]](https://github.com/HyeonseobNam/MDNet)  0.678   0.909
+- [[SANet]](http://www.dabi.temple.edu/~hbling/publication-selected.htm)   0.661   0.913
+- [[ECO]](http://www.cvl.isy.liu.se/research/objrec/visualtracking/ecotrack/index.html) 0.691   0.910
 - [[CFNet]](https://blog.csdn.net/discoverer100/article/details/79758131?utm_source=blogxgwz1)
 
 ### Prospect
