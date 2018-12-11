@@ -1,4 +1,4 @@
-# MatConvNet Saliency Visualization
+# MatConvNet Saliency Visualization (Merged into 'VisualTracking_DRL'
 
 This is a MatConvNet demo of several saliency visualization methods of ConvNet models.
 
