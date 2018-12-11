@@ -51,7 +51,8 @@ classNumber = 1000;
 % net.move('gpu');
 
 %% Prep Image
-im = imread('Images/zebra_elephant.jpg');
+testImagePath = fullfile(dataDir, 'zebra_elephant.jpg');
+im = imread(testImagePath);
 imSize = size(im);
 im_ = single(im);
 im_ = imresize(im_, net.meta.normalization.imageSize(1:2));
