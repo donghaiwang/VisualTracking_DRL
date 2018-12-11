@@ -110,19 +110,19 @@ switch method
         
         % Invert Top/Final Layer Weights (non-elephant)
         net.params(net.getParamIndex(finalLayerFilter)).value = net.params(net.getParamIndex(finalLayerFilter)).value .* -1;
-        net.eval(netInput,derOutput);
+        net.eval(netInput,derOutput);   % compute Marginal Winning Probability
         penultimateDerPrime = net.vars(net.getVarIndex(penultimateLayer)).der;
         net.reset
         
         % Invert Back (Go back to before: elephant)
         net.params(net.getParamIndex(finalLayerFilter)).value = net.params(net.getParamIndex(finalLayerFilter)).value .* -1;
-        net.eval(netInput,derOutput);
+        net.eval(netInput,derOutput);   % contrastive MWP
         penultimateDer = net.vars(net.getVarIndex(penultimateLayer)).der;
         net.reset
         
         % Compute Contrastive Signal: Backward From Penultimate Derivative
         contrastDer = penultimateDer - penultimateDerPrime;
-        derOutput = {penultimateLayer, contrastDer};
+        derOutput = {penultimateLayer, contrastDer};    % using the contrastive distinguished encoding rules as backwork input
         
         % Forward -> Backward
         net.eval(netInput,derOutput);
