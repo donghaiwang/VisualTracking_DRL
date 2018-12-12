@@ -34,9 +34,9 @@ net = dagnn.DagNN.loadobj(net);
 net.mode = 'test';
 % 2014 Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps 
 % method = 'Saliency'; % http://arxiv.org/abs/1312.6034  
-method = 'CAM'; % https://arxiv.org/abs/1512.04150
+% method = 'CAM'; % https://arxiv.org/abs/1512.04150
 % 2016 Top-down Neural Attention by Excitation Backprop
-% method = 'ExBackprop'; % https://arxiv.org/abs/1608.00507  
+method = 'ExBackprop'; % https://arxiv.org/abs/1608.00507  
 
 switch method
     case 'CAM'
