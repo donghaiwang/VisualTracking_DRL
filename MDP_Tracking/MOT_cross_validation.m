@@ -6,6 +6,11 @@
 % --------------------------------------------------------
 %
 % cross_validation on the MOT benchmark
+%%
+% 运行此交叉验证脚本到imResampleMex函数时报错：
+% Requested 863288426630x139998753980417x139998485527904 (17179869184.0GB) array exceeds maximum array size preference.
+% Creation of arrays greater than this limit may take a long time and cause MATLAB to become unresponsive
+%%
 function MOT_cross_validation
 
 % set is_train to 0 if testing trained trackers only

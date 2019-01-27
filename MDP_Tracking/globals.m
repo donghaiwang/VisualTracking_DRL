@@ -9,8 +9,7 @@ function opt = globals()
 opt.root = pwd;
 
 % path for MOT benchmark
-mot_paths = {'/home/yuxiang/Projects/Multitarget_Tracking/MOTbenchmark', ...
-    '/scail/scratch/u/yuxiang/MOTbenchmark'};
+mot_paths = {'/home/laoli/workspace/data/MOT'};  % MOT数据的上一级（2DMOT2015所在的路径）
 for i = 1:numel(mot_paths)
     if exist(mot_paths{i}, 'dir')
         opt.mot = mot_paths{i};

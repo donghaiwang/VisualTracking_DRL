@@ -13,8 +13,8 @@ include = ' -I/usr/local/include/opencv/ -I/usr/local/include/ -I/usr/include/op
 lib = ' -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_video';
 eval(['mex lk.cpp -O' include lib]);
 
-mex distance.cpp 
-mex imResampleMex.cpp 
-mex warp.cpp
+mex -g distance.cpp 
+mex -g imResampleMex.cpp 
+mex -g warp.cpp
 
 disp('Compilation finished.');
