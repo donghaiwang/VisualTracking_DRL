@@ -1,4 +1,4 @@
-# Multi-Ojbect Tracking Use Deep Reinforcement Learning
+# Multi-Object Tracking Use Deep Reinforcement Learning
 
 - ADNet: Action-Decision Networks for Visual Tracking with Deep Reinforcement Learning [[Paper]](https://drive.google.com/open?id=0B34VXh5mZ22cZUs2Umc1cjlBMFU)
 - [[Project Page]](https://sites.google.com/view/cvpr2017-adnet) 
