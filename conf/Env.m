@@ -1,6 +1,6 @@
 classdef Env
     properties (Constant = true)
-        isDebug = false;
+        isDebug = true;
         CidiHWaddr = '10:62:e5:04:18:40';
         baseHWaddr = '70:8b:cd:a8:7a:9e';
     end
