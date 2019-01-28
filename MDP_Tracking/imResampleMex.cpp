@@ -149,9 +149,10 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   nrm=(double)mxGetScalar(prhs[3]);
 
   // create output array
-  // 参数都正常却报错：  Requested 863288426630x140230682214401x140232494136736 (17179869184.0GB) array exceeds maximum array size preference.
+  // error when parameter is right: Requested 863288426630x140230682214401x140232494136736 (17179869184.0GB) array exceeds maximum array size preference.
   //  Creation of arrays greater than this limit may take a long time and cause MATLAB to become unresponsive.
   //  See array size limit or preference panel for more information.
+  // mxCreateNumericArray(ndim, dims, classid, ComplexFlag(real or complex))：
   plhs[0] = mxCreateNumericArray(3, (const mwSize*) ms, id, mxREAL);
   n=ns[0]*ns[1]*nCh; m=ms[0]*ms[1]*nCh;
 

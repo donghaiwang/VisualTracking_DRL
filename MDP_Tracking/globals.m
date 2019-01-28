@@ -8,8 +8,15 @@ function opt = globals()
 
 opt.root = pwd;
 
+PROJECT_ROOT = fileparts(pwd);
+addpath(fullfile(PROJECT_ROOT, 'conf'));    % add project configuration path
+
 % path for MOT benchmark
-mot_paths = {'/home/laoli/workspace/data/MOT'};  % MOT数据的上一级（2DMOT2015所在的路径）
+if isunix
+    mot_paths = {'/home/laoli/workspace/data/MOT'};  % MOT dataset root path('2DMOT2015' in it.)
+else
+    mot_paths = {'D:\workspace\data\MOT'};          % in windows
+end
 for i = 1:numel(mot_paths)
     if exist(mot_paths{i}, 'dir')
         opt.mot = mot_paths{i};

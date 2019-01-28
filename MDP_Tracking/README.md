@@ -24,6 +24,7 @@ If you find MDP_Tracking useful in your research, please consider citing:
     }
 
 ### Usage on the 2D MOT benchmark
+[install guide](https://www.smwenku.com/a/5b7f87292b717767c6b0043b/zh-cn/)
 
 1. Download the 2D MOT benchmark (data and development kit) from https://motchallenge.net/data/2D_MOT_2015/
 
