@@ -215,7 +215,7 @@ while 1
                 if reward == -1
                     tracker.f_occluded(end+1,:) = f;
                     tracker.l_occluded(end+1) = label;
-                    tracker.w_occluded = svmtrain(tracker.l_occluded, tracker.f_occluded, '-c 1 -q -g 1 -b 1');
+                    tracker.w_occluded = svmtrainCustom(tracker.l_occluded, tracker.f_occluded, '-c 1 -q -g 1 -b 1');
                     if is_text
                         fprintf('training examples in occluded state %d\n', size(tracker.f_occluded,1));
                     end

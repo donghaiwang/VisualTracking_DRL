@@ -20,7 +20,7 @@ end
 
 % track all points by Lucas-Kanade tracker from frame I to frame J, 
 % estimate Forward-Backward error, and NCC for each point
-xFJ = lk(2, I, J, xFI, xFII, level);
+xFJ = lk(2, I, J, xFI, xFII, level);    % copy dll file to current directory
 
 medFB  = median2(xFJ(3,:)); % get median of Forward-Backward error
 medNCC = median2(xFJ(4,:)); % get median for NCC

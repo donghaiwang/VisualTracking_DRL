@@ -47,7 +47,7 @@ if( same && norm==1 ); B=A; return; end
 if( bilinear )
   % use bilinear interpolation
   if(k==1), m1=round(scale*m); n1=round(scale*n);
-  else m1=scale(1); n1=scale(2); end
+  else m1=scale(1); n1=scale(2); end     % load('results\debugImResampleMex.mat')
   B=imResampleMex(A,m1,n1,norm);  % mex -g; restart Eclipse ;save('results/debugImResampleMex.mat', 'A', 'm1', 'n1', 'norm')
 else
   % use nearest neighbor interpolation
